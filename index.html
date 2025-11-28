@@ -6,10 +6,9 @@
   <title>AMB — Profile</title>
   <meta name="description" content="Simple static profile page for AMB with interactive visuals" />
   <style>
-    /* Reset + basic layout */
     :root{
-      --bg1:#0f1724; /* slate-900 */
-      --bg2:#020617; /* near black */
+      --bg1:#0f1724;
+      --bg2:#020617;
       --glass: rgba(255,255,255,0.04);
       --accent-from: #ff7ab6;
       --accent-mid: #ff6a00;
@@ -19,55 +18,60 @@
     html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial}
     body{
       background: radial-gradient(1200px 600px at 10% 10%, rgba(255,122,189,0.06), transparent),linear-gradient(180deg,var(--bg1),var(--bg2));
-      color:#e6eef8;display:flex;align-items:center;justify-content:center;padding:28px;
+      color:#e6eef8;display:flex;align-items:center;justify-content:center;padding:20px;
     }
 
     .site{max-width:1100px;width:100%;text-align:center}
-    header{margin-bottom:18px}
+    header{margin-bottom:14px}
 
-    /* Animated gradient text for AMB */
     .name{
-      font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:0.02em;margin:0;padding:0;line-height:1;
+      font-size:clamp(36px,7vw,60px);font-weight:800;letter-spacing:0.02em;margin:0;padding:0;line-height:1;
       background:linear-gradient(90deg,var(--accent-from),var(--accent-mid),var(--accent-to));
       -webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:glide 6s ease infinite;
     }
     @keyframes glide{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-    .subtitle{opacity:0.7;margin-top:8px;font-size:14px}
+    .subtitle{opacity:0.75;margin-top:8px;font-size:13px}
 
     /* Grid of cards */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-    @media(max-width:900px){.cards{grid-template-columns:repeat(1,1fr)}}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px;align-items:start}
+    @media(max-width:900px){.cards{grid-template-columns:repeat(1,1fr);gap:12px}}
 
-    .card{background:var(--glass);border-radius:14px;overflow:hidden;backdrop-filter: blur(6px);box-shadow:0 6px 18px rgba(2,6,23,0.6);transition:transform .32s cubic-bezier(.2,.8,.2,1),box-shadow .32s}
+    .card{background:var(--glass);border-radius:12px;overflow:hidden;backdrop-filter: blur(6px);box-shadow:0 6px 18px rgba(2,6,23,0.6);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s}
     .card:hover{box-shadow:0 22px 60px rgba(2,6,23,0.7);transform:translateY(-6px)}
 
-    .visual{height:340px;position:relative;overflow:hidden}
+    /* responsive aspect frame instead of fixed height */
+    .visual{
+      position:relative;overflow:hidden;
+      aspect-ratio: 16 / 10; /* keeps consistent frame on all screens */
+      min-height:180px;      /* fallback for older browsers */
+    }
     .visual img{width:100%;height:100%;object-fit:cover;display:block;}
-    .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.1),rgba(2,6,23,0.5));mix-blend-mode:multiply}
-    .caption{padding:12px 14px;text-align:left}
-    .caption h3{margin:0;font-size:16px}
+    .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.08),rgba(2,6,23,0.45));mix-blend-mode:multiply}
+    .caption{padding:12px 12px 16px;text-align:left}
+    .caption h3{margin:0;font-size:15px}
     .caption p{margin:6px 0 0;font-size:13px;opacity:0.75}
 
-    /* subtle floating SVG */
-    .decor{position:absolute;right:12px;top:12px;opacity:0.18;pointer-events:none}
+    .decor{position:absolute;right:10px;top:10px;opacity:0.16;pointer-events:none}
 
-    /* tilt transform will be applied via JS */
     .tilt{transform-style:preserve-3d;will-change:transform}
 
-    /* tiny footer */
-    footer{margin-top:18px;font-size:12px;opacity:0.7}
+    footer{margin-top:12px;font-size:12px;opacity:0.7}
 
-    /* focus accessibility */
-    a:focus{outline:3px solid rgba(255,255,255,0.06);outline-offset:3px}
-
+    @media(max-width:480px){
+      body{padding:12px}
+      .name{font-size:34px}
+      .subtitle{font-size:12px}
+      .card{border-radius:10px}
+      .caption{padding:10px}
+    }
   </style>
 </head>
 <body>
   <div class="site" id="site-root">
     <header>
       <h1 class="name">AMB</h1>
-      <div class="subtitle"></div>
+     
     </header>
 
     <main>
@@ -75,15 +79,15 @@
 
         <article class="card tilt" data-caption="">
           <div class="visual">
-            <img src="/images/Pic1.jpeg" alt="" loading="lazy">
+            <img src="/images/Pic1.jpeg" alt="AMB photo 1" loading="lazy">
             <div class="overlay"></div>
           </div>
-          
+         
         </article>
 
         <article class="card tilt" data-caption="">
           <div class="visual">
-            <img src="/images/Pic2.jpeg" alt="" loading="lazy">
+            <img src="/images/Pic2.jpeg" alt="AMB photo 2" loading="lazy">
             <div class="overlay"></div>
             <svg class="decor" width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" stroke="white" stroke-opacity="0.7" stroke-width="2"/></svg>
           </div>
@@ -92,27 +96,28 @@
 
         <article class="card tilt">
           <div class="visual">
-            <img src="/images/Pic3.jpeg" loading="lazy">
+            <img src="/images/Pic3.jpeg" alt="AMB photo 3" loading="lazy">
             <div class="overlay"></div>
           </div>
-          
+         
         </article>
 
       </section>
 
       <footer>
        
-      </footer>
     </main>
   </div>
 
   <script>
-    // Simple 3D tilt / parallax effect for desktop and touch drag support for mobile.
     (function(){
       const container = document.getElementById('cards');
       const cards = Array.from(container.querySelectorAll('.tilt'));
 
-      let supportsPointer = window.PointerEvent !== undefined;
+      // reduce tilt strength on small screens for nicer UX
+      function getStrength() {
+        return window.innerWidth <= 480 ? 6 : 12;
+      }
 
       function applyTransform(card, rx, ry, scale){
         card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`;
@@ -123,41 +128,45 @@
       }
 
       function onMove(e){
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX) || 0;
-        const y = e.clientY || (e.touches && e.touches[0] && e.touches[0].clientY) || 0;
+        // normalize event for touch and mouse
+        const point = e.touches ? e.touches[0] : e;
+        const x = point.clientX || 0;
+        const y = point.clientY || 0;
 
         cards.forEach(card => {
           const r = card.getBoundingClientRect();
           const dx = x - (r.left + r.width/2);
           const dy = y - (r.top + r.height/2);
-          const rx = (dy / r.height) * -12; // rotateX
-          const ry = (dx / r.width) * 12;  // rotateY
+          const strength = getStrength();
+          const rx = (dy / r.height) * -strength;
+          const ry = (dx / r.width) * strength;
           const dist = Math.hypot(dx,dy);
           const maxDist = Math.hypot(window.innerWidth, window.innerHeight) / 2;
-          const scale = 1 + Math.max(0, 0.02 * (1 - dist / maxDist));
+          const scale = 1 + Math.max(0, 0.015 * (1 - dist / maxDist));
           applyTransform(card, rx, ry, scale.toFixed(3));
         });
       }
 
       function onLeave(){ cards.forEach(reset); }
 
-      // Desktop: listen to mousemove on container
       container.addEventListener('mousemove', onMove);
       container.addEventListener('mouseleave', onLeave);
 
-      // Touch support: track touchmove and touchend
+      // touch: use passive:false to allow responsive tracking on some browsers (but we don't call preventDefault)
       container.addEventListener('touchmove', function(ev){
         onMove(ev.touches ? ev.touches[0] : ev);
       }, {passive:true});
       container.addEventListener('touchend', onLeave);
 
-      // Accessibility: keyboard focus applies slight lift
+      // accessibility: focus lift
       cards.forEach(card=>{
         card.setAttribute('tabindex','0');
         card.addEventListener('focus', ()=>{ card.style.transform = 'translateY(-6px) scale(1.02)'; });
         card.addEventListener('blur', ()=>{ reset(card); });
       });
+
+      // optional: reflow on resize (so strength recalculates)
+      window.addEventListener('resize', ()=>{ cards.forEach(reset); });
 
     })();
   </script>
